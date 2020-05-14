@@ -1,3 +1,6 @@
+body {
+  background: #f89393;
+}
 .App {
   text-align: center;
 }
@@ -7,14 +10,14 @@
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
+/* @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
+} */
 
 .App-header {
-  background-color: #282c34;
+  background-color: #f89393;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -35,4 +38,90 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* End CRA styles */
+
+/* BEGIN custom styling */
+
+h1 {
+  padding: 0.5em;
+}
+nav {
+  background: #385979;
+}
+.nav-list {
+  background: #385979;
+  display: inline;
+}
+.nav-list-item {
+  padding: 1em;
+  background: #385979;
+  display: inline-block;
+}
+.nav-list-item:hover {
+  background: #8fc2f5;
+  font-weight: bold;
+}
+.nav-link {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+}
+.nav-link:hover {
+  color: #0f243a;
+}
+
+.primary-btn {
+  color: white;
+  font-size: inherit;
+  background: #385979;
+  border: none;
+}
+.submit-btn {
+  font-size: 2em;
+  padding: 0.25em;
+}
+.sign-up {
+  min-height: 2em;
+  min-width: 10em;
+}
+input {
+  width: 100%;
+  font-size: 2em;
+}
+input,
+label {
+  display: block;
+  margin: 0.5em;
+}
+.form-field {
+  margin: 2em 0;
+}
+.sign-up-form {
+  min-width: 60%;
+  margin: 0 auto;
+}
+.container {
+  max-width: 533px;
+  width: 70%;
+  margin: 5em auto;
+  align-items: center;
+}
+.center {
+  margin: 0 auto;
+}
+.fullspan {
+  width: 100%;
+  display: block;
+  margin: 0.5em;
+}
+.image {
+  height: 300px;
+  border: solid black 2px;
+  display: block;
+  max-width: 350px;
+}
+.links {
+  text-decoration: none;
 }
