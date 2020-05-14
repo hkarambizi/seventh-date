@@ -149,7 +149,7 @@ class Joke extends React.Component {
     return (
       <div>
       <div className="container">
-        <img src={this.state.gif.images.downsized_medium.url} className="duh center image"/>
+        <img src={this.state.gif.images.downsized_medium.url} className="duh center image" alt="really_image"/>
         <h2 className="center fullspan" style={{color: 'darkred'}}>
           C'mon Bro, I am good. But not that good!
           This app is still under construction until Mateja helps me out. Call or text his cell at 978.407.0600
