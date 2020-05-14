@@ -120,7 +120,6 @@ label {
   height: 300px;
   border: solid black 2px;
   display: block;
-  max-width: 350px;
 }
 .links {
   text-decoration: none;
