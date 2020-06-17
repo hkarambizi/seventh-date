@@ -27,7 +27,7 @@ const userSchema = new Schema({
     },
     accountId: {
         type: String,
-        default: ''
+        default: 'testAccount'
     },
     isActive: {
         type: Boolean,

@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { GiphyFetch } from "@giphy/js-fetch-api";
 import logo from "./sdalogo.png";
 import "./App.css";
-const axios = require('axios').default;
+const axios = require('axios');
 const gf = new GiphyFetch("eeHrDyybZpjK1Ml0wnl4BsNOrSY1pRnZ");
 
 function App() {
@@ -114,7 +114,7 @@ class SignUp extends React.Component {
   validateForm(){
     const {user} = this.state;
     const invalid = [];
-    const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
+    const validEmailRegex = RegExp(/^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,5})$/);
     const isEmailValid = validEmailRegex.test(user.email);
     if(!user.first.trim().length) {
       invalid.push({ name:"first", message: "Please Enter First Name"});
@@ -157,13 +157,18 @@ class SignUp extends React.Component {
     })
   }
   submitUser(user) {
-    axios.post('http://localhost:5000/users', {
-      firstName: user.first,
-      lastName: user.last,
-      email: user.email,
-      password: "testtest"
+    const {first, last, email, password} = user;
+    axios({
+      method: 'post',
+      url: 'http://localhost:5000/users',
+      data: {
+        firstName: first,
+        lastName: last,
+        email,
+        password
+      }
     }).then(response => {
-      console.log(response);
+      console.log(response.data);
     }).catch(err=> {
       // handle error
       throw new Error(err)
