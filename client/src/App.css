@@ -124,3 +124,18 @@ label {
 .links {
   text-decoration: none;
 }
+.error {
+  border: red solid 5px;
+}
+.error-message {
+  color: white;
+  font-weight: bold;
+  display: inline-block;
+  text-align: right;
+  background-color: red;
+  padding: 0.2em;
+  border-radius: 3px;
+}
+.hidden {
+  display: none;
+}
