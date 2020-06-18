@@ -187,7 +187,7 @@ render() {
     </p>
       <form className="sign-up-form" onSubmit={this.handleSubmit}>
       <input value="hidden" type="hidden" style={{display:'none'}}/>
-        <div className="form-field">
+        <div className="form-field input-field">
           <label htmlFor="first">First Name</label><span className="error-message hidden"></span>
           <input type="text" name="first" onChange={this.handleChange}/>
         </div>
