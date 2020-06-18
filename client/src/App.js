@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { GiphyFetch } from "@giphy/js-fetch-api";
 import logo from "./sdalogo.png";
+import prideflag from "./baker_pride_flag.png";
 import "./App.css";
 const axios = require('axios');
 const gf = new GiphyFetch("eeHrDyybZpjK1Ml0wnl4BsNOrSY1pRnZ");
@@ -52,8 +53,9 @@ function Home() {
   return (
     <div className="App">
       <header className="App-header">
+      <img src={prideflag} className="pride-logo" alt="pride flag" />
         <img src={logo} className="App-logo" alt="logo" />
-        <h3>Seventh Day Adventist Dating App</h3>
+        <h3 className="description">Seventh Day Adventist <span className="bold rainbow-text">Gay</span> Dating App</h3>
         <p>The only app you can use in church</p>
         <Link to="/signup">
           <button className="primary-btn sign-up">SIGN UP HERE</button>
