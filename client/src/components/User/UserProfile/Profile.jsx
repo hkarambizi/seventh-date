@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import {ProfileField} from '../../Field/Field';
-import "./Profile.scss";
+import "./Profile.css";
 
 
 
