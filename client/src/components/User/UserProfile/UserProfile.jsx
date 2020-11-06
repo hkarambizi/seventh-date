@@ -1,13 +1,13 @@
 import React, {useState, useEffect } from 'react';
 import Profile from './Profile';
 import { getUser } from '../../../api/users/users.js'
-const UserProfile = (props) => {
+const UserProfile = ({match: {params}}) => {
     // set intial state
     const [isLoggedIn, setLoggedIn] = useState(null);
     const [user, setUser] = useState({});
     //  load user
     useEffect(()=> {
-        getUser("5ee9b62509c5ce4bb658ea98")
+        getUser(params.userId)
         .then((userData) => {
             setUser(user => {
                 return {

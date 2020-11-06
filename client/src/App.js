@@ -5,6 +5,7 @@ import UserProfile from './components/User/UserProfile/UserProfile';
 import logo from "./sdalogo.png";
 import prideflag from "./baker_pride_flag.png";
 import "./App.css";
+
 const axios = require('axios');
 const gf = new GiphyFetch("eeHrDyybZpjK1Ml0wnl4BsNOrSY1pRnZ");
 
@@ -30,7 +31,7 @@ function App() {
             renders the first one that matches the current URL. */}
         <Switch>
           <Route path="/about">
-            <UserProfile />
+            <About />
           </Route>
           <Route path="/login">
             <Users />
@@ -38,9 +39,7 @@ function App() {
           <Route path="/signup">
             <SignUp />
           </Route>
-          <Route path="/notyetman">
-            <Joke />
-          </Route>
+          <Route path="/users/:userId" component={UserProfile}/>
           <Route path="/">
             <Home />
           </Route>
