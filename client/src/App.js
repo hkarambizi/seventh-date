@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { GiphyFetch } from "@giphy/js-fetch-api";
 import UserProfile from './components/User/UserProfile/UserProfile';
+import UserSignUp from './components/User/UserSignUp/UserSignUp';
 import logo from "./sdalogo.png";
 import prideflag from "./baker_pride_flag.png";
 import "./App.css";
@@ -37,7 +38,7 @@ function App() {
             <Users />
           </Route>
           <Route path="/signup">
-            <SignUp />
+            <UserSignUp/>
           </Route>
           <Route path="/users/:userId" component={UserProfile}/>
           <Route path="/">
@@ -73,157 +74,7 @@ function Users() {
   return <h2>Users</h2>;
 }
 
-class SignUp extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: {
-        first: "",
-        last: "",
-        email: "",
-        password: "",
-        confirmPassword: ""
-      },
-      errors: []
-  }
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-}
-  handleChange(event) {
-    const { user } = { ...this.state };
-    const currentState = user;
-    const { name, value } = event.target;
-    currentState[name] = value;
-    this.setState({ user: currentState });
-  }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    this.clearErrorMessages();
-    this.setState({errors: []}, ()=> {
-      console.log("before errros", this.state);
-    const {user} = this.state;
-    const invalidFields = this.validateForm();
-    this.setState({errors: invalidFields}, ()=> {
-      console.log("State", this.state);
-      if(this.state.errors.length){
-       return;
-      }
-      this.submitUser(user);
-      })
-    })
-  }
-  validateForm(){
-    const {user} = this.state;
-    const invalid = [];
-    const validEmailRegex = RegExp(/^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,5})$/);
-    const isEmailValid = validEmailRegex.test(user.email);
-    if(!user.first.trim().length) {
-      invalid.push({ name:"first", message: "Please Enter First Name"});
-    }
-    if(!user.last.trim().length) {
-      invalid.push({name:"last", message: "Please Enter Last Name"});
-    }
-    if(!isEmailValid) {
-      invalid.push({name:"email", message:"Please Enter A Valid Email"});
-    }
-    if(user.password.trim().length < 6) {
-      invalid.push({name:"password", message:"Passwords must be greater than 6 characters"});
-    }
-    if(user.password !== user.confirmPassword){
-      invalid.push({name: "confirmPassword", message:"Passwords do not match"})
-    }
-    console.log("INVALID: ",invalid)
-    invalid.forEach(err => this.showErrorMessage(err.name, err.message));
-    return invalid;
-  }
-  handleError() {
-
-  }
-
-  showErrorMessage(name, message){
-    const field = document.querySelector(`input[name="${name}"]`);
-    field.classList.add('error')
-    const formDiv = field.parentElement;
-    const errorDialog = formDiv.querySelector('.error-message')
-    errorDialog.classList.remove('hidden');
-    errorDialog.innerHTML = message;
-  }
-  clearErrorMessages() {
-    const formDivs = document.querySelectorAll('.input-field');
-    formDivs.forEach(el => {
-      const field = el.querySelector('input');
-      field.classList.remove('error')
-      const errorDialog = el.querySelector('.error-message')
-      errorDialog.classList.add('hidden');
-    })
-  }
-  submitUser(user) {
-    const {first, last, email, password} = user;
-    axios({
-      method: 'post',
-      url: '/users',
-      data: {
-        firstName: first,
-        lastName: last,
-        email,
-        password
-      }
-    }).then(response => {
-      console.log(response.data);
-    }).catch(err=> {
-      // handle error
-      throw new Error(err)
-  })
-}
-render() {
-  return (
-    <div className="container">
-    <h1 className="center">
-      Sign Up User
-    </h1>
-    <p className="center">
-      Please fill out all fields below and submit to join 7th Date.
-    </p>
-      <form className="sign-up-form" onSubmit={this.handleSubmit}>
-      <input value="hidden" type="hidden" style={{display:'none'}}/>
-        <div className="form-field input-field">
-          <label htmlFor="first">First Name</label><span className="error-message hidden"></span>
-          <input type="text" name="first" onChange={this.handleChange}/>
-        </div>
-        <div className="form-field input-field">
-          <label htmlFor="last">Last Name</label><span className="error-message hidden"></span>
-          <input type="text" name="last" onChange={this.handleChange}/>
-        </div>
-        <div className="form-field input-field">
-          <label htmlFor="email">Email Address</label><span className="error-message hidden"></span>
-          <input type="text" name="email" onChange={this.handleChange} required/>
-        </div>
-        <div className="form-field input-field">
-          <label htmlFor="password">Password</label><span className="error-message hidden"></span>
-          <input type="password" name="password" autoComplete="new-password" onChange={this.handleChange} required/>
-        </div>
-        <div className="form-field input-field">
-          <label htmlFor="confirm-password">Confirm Password</label><span className="error-message hidden"></span>
-          <input type="password" name="confirmPassword" autoComplete="new-password" onChange={this.handleChange} required/>
-        </div>
-        {/* <div className="form-field">
-          <label htmlFor="passwordConfirm">Confirm Password</label>
-          <input type="password" name="passwordConfirm" autoComplete="new-password" required/>
-        </div> */}
-        <div className="form-field">
-          <input type="submit" className="primary-btn submit-btn fullspan links"/>
-        </div>
-          {/* <Link to="/notyetman">
-          <button className="primary-btn submit-btn fullspan links">SIGN UP HERE</button>
-          </Link> */}
-
-      </form>
-    </div>
-  );
-}
-
-}
 class Joke extends React.Component {
   constructor(props) {
     super(props);

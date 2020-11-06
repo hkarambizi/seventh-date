@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {EditableProfileField} from '../../Field/Field';
+import {ProfileField} from '../../Field/Field';
 import "./Profile.scss";
 
 
@@ -9,9 +9,9 @@ const ProfileDiv = ({ className, editing, user }) => {
   return (
     <div className={className}>
       <h3>{user.firstName} {user.lastName}</h3>
-      <EditableProfileField type="number" field="age" />
-      <EditableProfileField type="text" field="gender" />
-      <EditableProfileField type="text" field="location" />
+      <ProfileField type="number" field="age" editable={editing} value={user.age}/>
+      <ProfileField type="text" field="gender" editable={editing} value={user.gender}/>
+      <ProfileField type="text" field="city" editable={editing} value={user.city}/>
     </div>
   );
 };

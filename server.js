@@ -60,21 +60,24 @@ app.get("/users/:id", function (req, res) {
 app.post("/users", function (req, res) {
 
   console.log(req.body)
-  const {email, firstName, lastName, password} = req.body;
+  const {email, firstName, lastName, age, gender, city, password} = req.body;
 
   const newUser = new User();
   newUser.email = email;
   newUser.firstName = firstName;
   newUser.lastName = lastName;
+  newUser.age = age;
+  newUser.gender = gender;
+  newUser.city = city;
   newUser.password = newUser.generateHash(password);
 
-  newUser.save().then((user) =>
+  newUser.save().then((user) => {
       res.json({
         success: true,
         message: "Success: User signed up",
         user
       })
-    )
+  })
     .catch((err) => {
       console.log(err);
       res.status(400).json({

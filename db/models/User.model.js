@@ -12,6 +12,22 @@ const userSchema = new Schema({
         type: String,
         default: ''
     },
+    age: {
+        type: Number,
+        default: null
+    },
+    gender: {
+        type: String,
+        default: ''
+    },
+    city: {
+        type: String,
+        default: ''
+    },
+    avatar: {
+        type: String,
+        default: 'https://www.pngitem.com/pimgs/m/421-4212266_transparent-default-avatar-png-default-avatar-images-png.png'
+    },
     email: {
         type: String,
         default: '',
@@ -21,21 +37,13 @@ const userSchema = new Schema({
         type: String,
         default: ''
     },
-    account: {
-        type: String,
-        default: ''
-    },
-    accountId: {
-        type: String,
-        default: 'testAccount'
-    },
     isActive: {
         type: Boolean,
         default: true
     },
     userAccess: {
       type: String,
-      default: 'admin'
+      default: 'member'
   },
 }, {
     timestamps: true,
