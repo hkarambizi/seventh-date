@@ -31,6 +31,10 @@
     "express": "^4.17.1",
     "mongoose": "^5.9.18"
   },
+  "engines": {
+    "node": "12.16.1",
+    "npm":"6.13.4"
+  },
   "devDependencies": {},
   "repository": {
     "type": "git",
