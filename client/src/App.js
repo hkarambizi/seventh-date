@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { GiphyFetch } from "@giphy/js-fetch-api";
+import UserProfile from './components/User/UserProfile/UserProfile';
 import logo from "./sdalogo.png";
 import prideflag from "./baker_pride_flag.png";
 import "./App.css";
@@ -29,7 +30,7 @@ function App() {
             renders the first one that matches the current URL. */}
         <Switch>
           <Route path="/about">
-            <About />
+            <UserProfile />
           </Route>
           <Route path="/login">
             <Users />
@@ -162,7 +163,7 @@ class SignUp extends React.Component {
     const {first, last, email, password} = user;
     axios({
       method: 'post',
-      url: 'http://localhost:5000/users',
+      url: '/users',
       data: {
         firstName: first,
         lastName: last,

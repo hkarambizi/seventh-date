@@ -1,0 +1,42 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "api for seventh date app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server",
+    "client": "cd client && yarn start",
+    "dev": "concurrently --kill-others \"npm start\" \"npm run client\""
+  },
+  "keywords": [
+    "api",
+    "app",
+    "user",
+    "social",
+    "media"
+  ],
+  "author": "Hairy Candy",
+  "license": "ISC",
+  "dependencies": {
+    "@types/body-parser": "^1.19.0",
+    "@types/mongoose": "^5.7.37",
+    "@types/node": "^14.14.6",
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.3.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.18"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hkarambizi/seventh-date.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hkarambizi/seventh-date/issues"
+  },
+  "homepage": "https://github.com/hkarambizi/seventh-date#readme"
+}

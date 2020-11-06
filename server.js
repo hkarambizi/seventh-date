@@ -2,7 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const path = require("path");
-const User = require("./models/User.model");
+const bodyParser = require('body-parser');
+const User = require("./db/models/User.model");
 
 require("dotenv").config();
 
@@ -48,7 +49,13 @@ app.get("/users", function (req, res) {
     if(err) console.log(err)
     res.json({ users: users});
   })
+});
 
+app.get("/users/:id", function (req, res) {
+  User.findById(req.params.id, (err, user) =>{
+    if(err) console.log(err)
+    res.json(user);
+  })
 });
 app.post("/users", function (req, res) {
 
@@ -61,12 +68,11 @@ app.post("/users", function (req, res) {
   newUser.lastName = lastName;
   newUser.password = newUser.generateHash(password);
 
-  newUser
-    .save()
-    .then(() =>
+  newUser.save().then((user) =>
       res.json({
         success: true,
         message: "Success: User signed up",
+        user
       })
     )
     .catch((err) => {
