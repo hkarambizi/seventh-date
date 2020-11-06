@@ -124,3 +124,41 @@ label {
 .links {
   text-decoration: none;
 }
+.error {
+  border: red solid 5px;
+}
+.error-message {
+  color: white;
+  font-weight: bold;
+  display: inline-block;
+  text-align: right;
+  background-color: red;
+  padding: 0.2em;
+  border-radius: 3px;
+}
+.hidden {
+  display: none;
+}
+.pride-logo {
+  max-height: 5em;
+}
+.description {
+  max-width: 50%;
+}
+.rainbow-text {
+  background-image: linear-gradient(
+    to left,
+    violet,
+    indigo,
+    blue,
+    green,
+    yellow,
+    orange,
+    red
+  );
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.bold {
+  font-weight: bold;
+}

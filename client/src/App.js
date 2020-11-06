@@ -1,8 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { GiphyFetch } from "@giphy/js-fetch-api";
+import UserProfile from './components/User/UserProfile/UserProfile';
+import UserSignUp from './components/User/UserSignUp/UserSignUp';
 import logo from "./sdalogo.png";
+import prideflag from "./baker_pride_flag.png";
 import "./App.css";
+
+const axios = require('axios');
 const gf = new GiphyFetch("eeHrDyybZpjK1Ml0wnl4BsNOrSY1pRnZ");
 
 function App() {
@@ -33,11 +38,9 @@ function App() {
             <Users />
           </Route>
           <Route path="/signup">
-            <SignUp />
+            <UserSignUp/>
           </Route>
-          <Route path="/notyetman">
-            <Joke />
-          </Route>
+          <Route path="/users/:userId" component={UserProfile}/>
           <Route path="/">
             <Home />
           </Route>
@@ -51,8 +54,9 @@ function Home() {
   return (
     <div className="App">
       <header className="App-header">
+      <img src={prideflag} className="pride-logo" alt="pride flag" />
         <img src={logo} className="App-logo" alt="logo" />
-        <h3>Seventh Day Adventist Dating App</h3>
+        <h3 className="description">Seventh Day Adventist <span className="bold rainbow-text">Gay</span> Dating App</h3>
         <p>The only app you can use in church</p>
         <Link to="/signup">
           <button className="primary-btn sign-up">SIGN UP HERE</button>
@@ -70,45 +74,10 @@ function Users() {
   return <h2>Users</h2>;
 }
 
-function SignUp() {
-  return (
-    <div className="container">
-    <h1 className="center">
-      Sign Up User
-    </h1>
-    <p className="center">
-      Please fill out all fields below and submit to join 7th Date.
-    </p>
-      <form className="sign-up-form">
-      <input value="hidden" type="hidden" style={{display:'none'}}/>
-        <div className="form-field">
-          <label htmlFor="first">First Name</label>
-          <input type="text" name="first"/>
-        </div>
-        <div className="form-field">
-          <label htmlFor="last">Last Name</label>
-          <input type="text" name="last"/>
-        </div>
-        <div className="form-field">
-          <label htmlFor="email">Email Address</label>
-          <input type="text" name="email" required/>
-        </div>
-        <div className="form-field">
-          <label htmlFor="password">Password</label>
-          <input type="password" name="password" autoComplete="new-password" required/>
-        </div>
 
-          <Link to="/notyetman">
-          <button className="primary-btn submit-btn fullspan links">SIGN UP HERE</button>
-          </Link>
-
-      </form>
-    </div>
-  );
-}
 class Joke extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       gif: {images: undefined },
       limit: 100 };
