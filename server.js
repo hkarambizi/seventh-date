@@ -110,7 +110,7 @@ app.put("/users/:id", function (req, res) {
         message: `Error: ${err}`,
       })
     }
-    res.status(204).json(updatedUser)
+    res.json(updatedUser)
   })
 })
 
