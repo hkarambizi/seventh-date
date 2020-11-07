@@ -13,7 +13,7 @@ const Img = ({ className, user }) => {
 };
 
 const Image = styled(Img)`
-  width: 30%;
+  width: 15em;
   box-shadow: 3px 3px 3px black;
   border-radius: 50%;
   border: 2px solid black;
