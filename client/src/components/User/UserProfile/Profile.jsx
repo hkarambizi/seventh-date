@@ -6,10 +6,10 @@ import "./Profile.css";
 
 
 
-const ProfileDiv = ({ className, editing, user }) => {
+const ProfileDiv = ({ className, editing, updateProfileHandler, user }) => {
   return (
     <div className={className}>
-      <Avatar user={user}/>
+      <Avatar user={user} setUserState={updateProfileHandler}/>
       <h3>{user.firstName} {user.lastName}</h3>
       <ProfileField type="number" field="age" editable={editing} value={user.age}/>
       <ProfileField type="text" field="gender" editable={editing} value={user.gender}/>

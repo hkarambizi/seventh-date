@@ -35,3 +35,17 @@ export const submitUser = (user) => {
 
   })
 }
+
+export const updateUserAvatar = ({ user, fileUrl }) => {
+  return axios({
+    method: 'put',
+    url: `/users/${user._id}`,
+    data: {
+      avatar: fileUrl
+    }
+  }).catch(err=> {
+    // handle error
+    console.log("something happened")
+    throw new Error(err)
+})
+}

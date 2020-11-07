@@ -162,3 +162,10 @@ label {
 .bold {
   font-weight: bold;
 }
+.edit-option {
+  color: #385979;
+  font-size: 1.5em;
+  text-align: right;
+  position: relative;
+  bottom: 0.5em;
+}

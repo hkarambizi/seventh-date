@@ -40,51 +40,99 @@ connection.once("open", () => {
 });
 
 // AWS config for file upload
+// create S3 instance
+const s3 = new AWS.S3();
+
 // configure the keys for accessing AWS
 AWS.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
 });
+// abstracts function to upload a file returning a promise
+const uploadFile = (buffer, name, type) => {
+  const params = {
+    ACL: 'public-read',
+    Body: buffer,
+    Bucket: process.env.S3_BUCKET,
+    ContentType: type.mime,
+    Key: `${name}.${type.ext}`,
+  };
+  return s3.upload(params).promise();
+};
 
 app.use(cors()); // enable CORS on all requests (https://www.npmjs.com/package/cors)
 app.use(express.json())
 /**
  * Routes
  */
-app.get("/test", function (req, res) {
-  console.log("endpoint reached");
-  res.json({ message: "Hello World!\n" });
+// Define POST route for uploading images
+app.post('/upload', (request, response) => {
+  const form = new multiparty.Form();
+  form.parse(request, async (error, fields, files) => {
+    if (error) {
+      return response.status(500).send(error);
+    };
+    try {
+      const path = files.file[0].path;
+      const buffer = fs.readFileSync(path);
+      const type = await fileType.fromBuffer(buffer);
+      const fileName = `seventhdate/${Date.now().toString()}`;
+      const data = await uploadFile(buffer, fileName, type);
+      return response.status(200).send(data);
+    } catch (err) {
+      return response.status(500).send(err);
+    }
+  });
 });
 
+// Users controller
+
+// Get All Users
 app.get("/users", function (req, res) {
   User.find({}, (err, users) =>{
     if(err) console.log(err)
     res.json({ users: users});
   })
 });
-
+// Get User By Id
 app.get("/users/:id", function (req, res) {
   User.findById(req.params.id, (err, user) =>{
     if(err) console.log(err)
     res.json(user);
   })
 });
+app.put("/users/:id", function (req, res) {
+  User.findByIdAndUpdate(req.params.id, req.body ,{new: true}, (err, updatedUser) => {
+    if(err) {
+      console.log(err);
+      res.status(400).json({
+        success: false,
+        message: `Error: ${err}`,
+      })
+    }
+    res.status(204).json(updatedUser)
+  })
+})
+
+// Create New User
 app.post("/users", function (req, res) {
 
   console.log(req.body)
   const {email, firstName, lastName, age, gender, city, password} = req.body;
 
-  const newUser = new User();
-  newUser.email = email;
-  newUser.firstName = firstName;
-  newUser.lastName = lastName;
-  newUser.age = age;
-  newUser.gender = gender;
-  newUser.city = city;
+  const newUser = new User({
+    email,
+    firstName,
+    lastName,
+    age,
+    gender,
+    city
+  });
+  // generate hashed password
   newUser.password = newUser.generateHash(password);
-
+  // save new user
   newUser.save().then((user) => {
-      res.json({
+      res.status(201).json({
         success: true,
         message: "Success: User signed up",
         user

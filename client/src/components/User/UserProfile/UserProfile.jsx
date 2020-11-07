@@ -4,30 +4,38 @@ import Profile from './Profile';
 import { getUser } from '../../../api/users/users.js'
 const UserProfile = ({match: {params}}) => {
     // set intial state
-    const [isLoggedIn, setLoggedIn] = useState(null);
     const [user, setUser] = useState({});
     //  load user
     useEffect(()=> {
         getUser(params.userId)
         .then((userData) => {
-            setUser(user => {
+            setUser(prevUser => {
                 return {
-                    ...user,
+                    ...prevUser,
                     ...userData
                 }
             });
         })
     },[])
 
+    const updateUser = (updatedUser) => {
+        setUser(prevUser => {
+            return {
+                ...prevUser,
+                ...updatedUser
+            }
+        });
+    }
 
 
     return (
         <div className="user-profile">
 
-            <Profile user={user}/>
+            <Profile user={user} updateProfileHandler={updateUser}/>
+
         </div>
     )
 
-    // DOM elements/components: Avatar, Details, Options
+
 }
 export default UserProfile;
