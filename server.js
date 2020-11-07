@@ -3,6 +3,10 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const path = require("path");
 const bodyParser = require('body-parser');
+const AWS = require('aws-sdk');
+const fs = require('fs');
+const fileType = require('file-type');
+const multiparty = require('multiparty');
 const User = require("./db/models/User.model");
 
 require("dotenv").config();
@@ -34,6 +38,14 @@ const connection = mongoose.connection;
 connection.once("open", () => {
   console.log("MongoDB database connection established successfully");
 });
+
+// AWS config for file upload
+// configure the keys for accessing AWS
+AWS.config.update({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+});
+
 app.use(cors()); // enable CORS on all requests (https://www.npmjs.com/package/cors)
 app.use(express.json())
 /**
