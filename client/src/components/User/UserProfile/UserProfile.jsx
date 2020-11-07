@@ -1,5 +1,6 @@
 import React, {useState, useEffect } from 'react';
 import Profile from './Profile';
+
 import { getUser } from '../../../api/users/users.js'
 const UserProfile = ({match: {params}}) => {
     // set intial state
@@ -22,6 +23,7 @@ const UserProfile = ({match: {params}}) => {
 
     return (
         <div className="user-profile">
+
             <Profile user={user}/>
         </div>
     )
